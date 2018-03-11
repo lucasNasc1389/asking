@@ -22,7 +22,7 @@ $hostname = gethostname();
 
 if ( in_array( $hostname, $devHostnames ) ) {
 	// ambiente de desenvolvimento
-	define( "ENV, 'dev");
+	define( "ENV", 'dev');
 	require_once APP_ROOT_PATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'env' . DIRECTORY_SEPARATOR . 'dev.php';
 } else {
 	// ambiemte de produção
