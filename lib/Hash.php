@@ -4,7 +4,7 @@ class Hash
 {
 	protected static $passwordHashAlg = 'sha512';
 
-	public static function( $str )
+	public static function password( $str )
 	{
 		// concatenando o salt à string original
 		$str .= PASSWORD_SALT;

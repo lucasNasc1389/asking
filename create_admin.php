@@ -31,5 +31,5 @@
  	echo "Erro ao criar usuário admin";
  	echo "<br><br>";
  	$error = $stmt->errorInfo();
- 	echo $error[2];
+ 	echo $error[1];
  }
