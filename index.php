@@ -5,7 +5,7 @@ $app = new \Slim\App();
 
 $app->get('/', function ()
 {
-	echo "<h1>home</h1>";
+	View::make( 'view-teste' );
 });
 
 $app->run();

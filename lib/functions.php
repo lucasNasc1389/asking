@@ -35,8 +35,8 @@ function logsPath() {
    	return sprintf(
    		"%s://%s%s",
    		isset( $_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
-   		$_SERVER['SERVER-NAME'],
-   		$_SERVER['SERVER-PORT'] == 80 ? '' : ':' . $_SERVER['SERVER_PORT']
+   		$_SERVER['SERVER_NAME'],
+   		$_SERVER['SERVER_PORT'] == 80 ? '' : ':' . $_SERVER['SERVER_PORT']
    	 );	
    }
 
