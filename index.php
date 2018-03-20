@@ -5,7 +5,7 @@ $app = new \Slim\App();
 
 $app->get('/', function ()
 {
-	View::make( 'view-teste' );
+	\Controllers\PagesController::home();
 });
 
 $app->run();
