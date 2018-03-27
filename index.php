@@ -10,7 +10,7 @@ $app->get('/', function ()
 
 $app->map(['GET', 'POST'], '/login', function()
 {
-	\Controllers\SessiossionsControler::login();
+	\Controllers\SessionsControler::login();
 });
 
 $app->run();
