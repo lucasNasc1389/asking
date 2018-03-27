@@ -8,4 +8,9 @@ $app->get('/', function ()
 	\Controllers\PagesController::home();
 });
 
+$app->map(['GET', 'POST'], '/login', function()
+{
+	\Controllers\SessiossionsControler::login();
+});
+
 $app->run();
