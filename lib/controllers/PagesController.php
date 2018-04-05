@@ -6,6 +6,6 @@ class PagesController
 {
 	public static function home()
 	{
-		\view::make( 'home' );
+		\View::make( 'home' );
 	}
 }
