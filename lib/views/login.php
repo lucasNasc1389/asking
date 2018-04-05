@@ -27,7 +27,7 @@
 			</div>
 		</div>
 
-		<div class="form-gorup">
+		<div class="form-group">
 			<div class="col-md-3">
 				<label for="password">Senha: </label>
 			</div>
