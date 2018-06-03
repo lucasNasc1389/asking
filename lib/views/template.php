@@ -38,8 +38,15 @@
 					<li><a href="<?php echo getBaseURL(); ?>">Página Inicial</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<?php echo getBaseURL()?>/login">Login</a></li>
-					<li><a href="<?php echo getBaseURL()?>/cadastro">Cadastre-se</a></li>
+				<?php if ( ( $user = Auth::user() ) != null): ?>
+					<li><a href="<?php echo getBaseURL() ?>/painel-de-controle">Painel de Controle</a></li>
+
+					<li><a href="<?php echo getBaseURL() ?>/logout">Sair</a></li>
+				<?php else: ?>
+					<li><a href="<?php echo getBaseURL() ?>/login">Login</a></li>
+
+					<li><a href="<?php echo getBaseURL() ?>/cadastro">Cadastre-se</a></li>
+				<?php endif; ?>
 				</ul>
 				
 			</div><!--/.nav-collapse -->

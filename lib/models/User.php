@@ -36,9 +36,9 @@ class User extends BaseModel
 		$this->token = $token;
 		$now = date( 'Y-m-d H:i:s');
 
-		$db = new \DB;
+		$DB = new \DB;
 		$sql = "UPDATE users SET token = :token, updated_at = :now WHERE id = :id";
-		$stmt = $db->prepare( $sql );
+		$stmt = $DB->prepare( $sql );
 		$stmt->bindParam( ":token", $token );
 		$stmt->bindParam( ":now", $now );
 		$stmt->bindParam( ":id", $this->id, \PDO::PARAM_INT );

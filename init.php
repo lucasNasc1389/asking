@@ -26,3 +26,5 @@ require_once 'functions.php';
 
 // inclui o autoloader do Composer
 require_once 'vendor/autoload.php';
+
+\Auth::checkUser();

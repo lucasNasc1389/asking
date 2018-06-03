@@ -13,4 +13,14 @@ $app->map(['GET', 'POST'], '/login', function()
 	\Controllers\SessionsController::login();
 });
 
+$app->get( '/logout', function()
+{
+	\Controllers\SessionsController::logout();
+});
+
+$app->get( '/fazer-pergunta', function()
+{
+	\Controllers\QuestionsController::create();
+});
+
 $app->run();

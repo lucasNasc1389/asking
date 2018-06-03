@@ -23,6 +23,111 @@ class SessionsController
 
 	protected static function processLoginForm()
 	{
-		
+		$email 	  = isset( $_POST['email'] ) ? $_POST['email'] : null;
+		$password = isset( $_POST['password'] ) ? $_POST['password'] : null;
+		$hashedPassword = \Hash::password( $password );
+
+		$errors = [];
+
+		if ( empty( $email ) )
+		{
+			$errors[] = 'Informe seu email';
+		}
+
+		if ( empty( $password ))
+		{
+			$errors[] = 'Informe sua senha';
+		} 	
+
+		if ( count( $errors ) > 0 )
+		{
+			return \View::make( 'login', compact( 'errors') );
+		}
+
+		$DB = new \DB;
+		$sql = "SELECT id, password, status FROM users WHERE email = :email";
+		$stmt = $DB->prepare( $sql );
+		$stmt->bindParam( ':email', $email );
+
+		$stmt->execute();
+
+		$rows = $stmt->fetchAll( \PDO::FETCH_OBJ);
+
+		if ( count( $rows ) <= 0)
+		{
+			$errors[] = 'Usuário não encontrado';
+		}
+		else
+		{
+			$user = $rows[0];
+
+			if ( $hashedPassword != $user->password )
+			{
+				$errors[] = 'Senha incorreta';
+			}
+			elseif ( $user->status != \Models\User::STATUS_ACTIVE )
+			{
+					$errors[] = 'Ative sua conta antes de fazer login';
+			}
+			else
+			{
+				// busca os dados do usuário para criar os dados no cookie
+				$objUser = new \Models\User;
+				$objUser->find( $user->id );
+
+				// gera um token de acesso
+				$token = $objUser->generateToken();
+
+				// salva o cookie com os dados do usuário
+				self::saveSessionCookieForUser( $objUser );
+
+				 // redireciona para a página inicial
+				redirect( getBaseURL() );
+			}
+		}
+
+		if ( count( $errors ) > 0 )
+		{
+			return \View::make( 'login', compact( 'errors' ));
+		}
 	}
+
+public static function saveSessionCookieForUser( \Models\User $user)
+{
+	$cookieData = [
+		'id' => $user->getId(),
+		'token' => $user->getToken(),
+	];
+
+	// 2592000 = 60 * 60 * 24 * 30, ou seja, 30 dias em segundos
+	setcookie( AUTH_USER_COOKIE_NAME, serialize( $cookieData ), time() + 2592000 );
+}
+
+public static function extractCookieInfo()
+{
+	if ( ! isset( $_COOKIE[AUTH_USER_COOKIE_NAME] ) )
+	{
+		return null;
+	}
+
+	$data = unserialize( $_COOKIE[AUTH_USER_COOKIE_NAME] );
+
+	return $data;
+}
+
+public static function logout()
+{
+	//remove o cookie de autenticação
+	self::destroySessionCookie();
+
+	// redireciona para a página inicial
+	redirect( getBaseURL() );
+}
+
+public static function destroySessionCookie()
+{
+	setcookie( AUTH_USER_COOKIE_NAME, '', 1);
+}
+
+
 }

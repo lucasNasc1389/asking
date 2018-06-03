@@ -9,7 +9,7 @@
 
  // Fuso-Horário (Timezone)
 // Lista de timezones suportador pelo PHP: http://php.net/manual/pt_BR/timezones.php
- date_default_timezone_set('America/Sao_paulo');
+ date_default_timezone_set('America/Sao_Paulo');
 
 
 /* Habilite todos os níveis de exibição de erros. essa configuração é geral, tanto para produção quanto
