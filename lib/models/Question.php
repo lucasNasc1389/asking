@@ -8,7 +8,7 @@ class Question extends BaseModel
 
 	protected $id;
 	protected $user_id;
-	protected $user; // \Models\User object
+	public $user; // \Models\User object
 	protected $title;
 	protected $description;
 	protected $created_at;
@@ -29,7 +29,7 @@ class Question extends BaseModel
 		$stmt = $DB->prepare( $sql );
 		$stmt->execute();
 
-		$rows - $stmt->fetchAll( \PDO::FETCH_OBJ );
+		$rows = $stmt->fetchAll( \PDO::FETCH_OBJ );
 
 		foreach ( $rows as $row )
 		{
@@ -81,26 +81,6 @@ class Question extends BaseModel
 		$this->user_id = $user_id;
 	}
 
-	/**
-	 * gets the of title
-	 *
-	 * @return string
-	 */
-
-	public function getTitle()
-	{
-		return $this->title;
-	}
-
-	/**
-	 * Sets the value of title
-	 *
-	 * @param string $title the title
-	 */
-	protected function setUserId( $user_id )
-	{
-		$this->user_id = $user_id;
-	}
 
 	/**
 	 * Gets the value of title

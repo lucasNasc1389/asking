@@ -41,6 +41,7 @@
  
             </div>
             <div class="col-md-9">
+            	<?php echo \CSRF::GenerateHiddenFormInput() ?>
                 <input type="submit" value="Acessar" class="btn btn-primary">
             </div>
         </div>

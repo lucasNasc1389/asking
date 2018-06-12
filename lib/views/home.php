@@ -24,11 +24,11 @@
 				<th>Data</th>
 			</thead>
 			<tbody>
-			<?php foreach ( $questions as $questions) : ?>
+			<?php foreach ( $questions as $question) : ?>
 				<tr>
 					<td>
 						<a href="<?php getBaseURL() ?>/pergunta/<?php echo $question->id ?>">
-							<?php  echo \xss::filter( $question->user->title ) ?>
+							<?php  echo \xss::filter( $question->title ) ?>
 						</a>
 					</td>
 					<td>

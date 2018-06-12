@@ -6,7 +6,7 @@
 <div class="row">
 	<div class="alert alert-danger">
 		<ul>
-		<?php freach ( $errors as $error ): ?>
+		<?php foreach ( $errors as $error ): ?>
 			<li>
 				<?php echo $error ?>
 			</li>
@@ -41,6 +41,7 @@
 			
 		</div>
 		<div class="col-md-9">
+			<?php echo \CSRF::GenerateHiddenFormInput() ?>
 			<input type="submit" value="Enviar pergunta" class="btn btn-primary">
 		</div>
 	</div>

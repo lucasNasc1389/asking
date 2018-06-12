@@ -7,7 +7,7 @@ class Auth
 		if ( ( $data = \Controllers\SessionsController::extractCookieInfo() ) != null)
 			{
 				$user = new \Models\User;
-				$user->find( $data[ 'id '] );
+				$user->find( $data['id'] );
 
 				return $user;
 			}
@@ -38,6 +38,14 @@ class Auth
 
 				redirect( getBaseURL() );
 			}
+		}
+	}
+
+	public static function denyNotLoggedInUsers()
+	{
+		if ( ( $user = self::user() ) == null )
+		{
+			redirect( getBaseURL() );
 		}
 	}
 }

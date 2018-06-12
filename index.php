@@ -23,4 +23,15 @@ $app->get( '/fazer-pergunta', function()
 	\Controllers\QuestionsController::create();
 });
 
+$app->post( '/enviar-pergunta', function()
+{
+	\Controllers\QuestionsController::store();
+});
+
+$app->get( '/pergunta/{id}', function ( $request )
+{
+	$id = $request->getAttribute('route')->getArgument('id');
+	\Controllers\QuestionsController::show( $id );
+});
+
 $app->run();
