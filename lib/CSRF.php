@@ -34,7 +34,7 @@ class CSRF
 		// remove o token da sessão, pois só deve ser usado uma vez
         $_SESSION[self::SESSION_KEY_NAME] = null;
 
-        if ( $postedToken != $sessionToken )
+        if ( $postedToken != $SessionToken )
         {
             echo "Tentativa de ataque por CSRF";
             exit;

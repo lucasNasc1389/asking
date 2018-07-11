@@ -46,6 +46,43 @@ class User extends BaseModel
 		$stmt->execute();
 	}
 
+    /**
+     * Altera a senha do usuário
+     * @param  string $password Nova senha, sem aplicação do hash
+     * @return bool     TRUE em caso de sucesso, FALSE caso contrário
+     */
+    public function changePassword( $password )
+    {
+        $hashedNewPassword = \Hash::password( $password );
+        $this->password = $hashedNewPassword;
+        $userID = $this->getId();
+        $now = date( 'Y-m-d H:i:s' );
+
+        $DB = new \DB;
+        $sql = "UPDATE users SET password = :password, updated_at = :now WHERE id = :id";
+        $stmt = $DB->prepare( $sql );
+        $stmt->bindParam(':password', $hashedNewPassword );
+        $stmt->bindParam(':now', $now );
+        $stmt->bindParam(':id', $userID, \PDO::PARAM_INT );
+
+        if ( $stmt->execute() )
+        {
+            //gera um novo token
+            $token = $this->generateToken();
+            $this->updateToken( $token );
+
+            // atualiza o token do cookie
+            \Controllers\SessionsController::saveSessionCookieForUser( $this );
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
 	/**
 	 *	Gets the value of nickname.
 	 *	@return string	
