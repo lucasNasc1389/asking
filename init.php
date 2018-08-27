@@ -1,4 +1,9 @@
 <?php
+/* 
+ * Script de inicialização (Bootstrapping)
+ */
+
+
 //mantém a sessão sempre ativa
 session_start();
 
