@@ -1,7 +1,9 @@
 <?php
 
 namespace Controllers;
-
+/**
+ * Controller para gerenciar ações do usuário
+ */
 class UsersController
 {
 	/**
@@ -118,6 +120,10 @@ class UsersController
 
 	}
 
+	
+	/**
+     * Alteração de senha
+     */
 	public static function changePassword()
 	{	
 		\Auth::denyNotLoggedInUsers();

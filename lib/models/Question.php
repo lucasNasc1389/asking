@@ -2,6 +2,10 @@
 
 namespace Models;
 
+
+/**
+ * Model que representa uma pergunta
+ */
 class Question extends BaseModel
 {
 	protected $tableName = 'questions';
@@ -14,6 +18,11 @@ class Question extends BaseModel
 	protected $created_at;
 	protected $updated_at;
 
+ 	/**
+     * Sobrescreve o método find da BaseModel, para definir 
+     * a propriedade "user", com o objeto \Models\User 
+     * correspondente
+     */
 	public function find( $value, $field = 'id', $fieldtype = \PDO::PARAM_STR )
 	{
 		parent::find( $value, $field, $fieldtype);
@@ -22,6 +31,11 @@ class Question extends BaseModel
 		$this->user->find( $this->user_id );
 	}
 
+
+ 	/**
+     * Busca todas as perguntas
+     * @return array Array com todas as perguntas
+     */
 	public static function all() 
 	{
 		$DB = new \DB;
@@ -29,6 +43,16 @@ class Question extends BaseModel
 		$stmt = $DB->prepare( $sql );
 		$stmt->execute();
 
+
+		/*
+         * Neste trecho, $rows será um array de objetos. 
+         * Porém são objetos genéricos, instâncias da classe stdClass
+         * Por isso teremos de usar o operador flecha (->) em vez dos getters e setters, que só poderiam ser 
+         * usados se fossem objetos da classe 
+         *\Models\Question
+         * http://php.net/manual/pt_BR/
+         * reserved.classes.php
+         */
 		$rows = $stmt->fetchAll( \PDO::FETCH_OBJ );
 
 		foreach ( $rows as $row )

@@ -2,6 +2,9 @@
 
 namespace Models;
 
+/**
+ * Model para o objeto relativo a uma resposta a uma pergunta
+ */
 class Answer extends BaseModel
 {
 	protected $tableName = 'answers';
@@ -14,6 +17,11 @@ class Answer extends BaseModel
 	protected $created_at;
 	protected $update_at;
 
+
+	/**
+     * Sobrescreve o método find da BaseModel, para definir as propriedades "user" e "question", com os objetos 
+     * \Models\User e \Models\Question correspondentes
+     */
 	public function find( $value, $field = 'id', $fieldtype = \PDO::PARAM_STR )
 	{
 		parent::find( $value, $field, $fieldtype )

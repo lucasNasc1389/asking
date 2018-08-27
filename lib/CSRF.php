@@ -1,10 +1,24 @@
 <?php
-
+/**
+ * Classe para proteção contra CSRF
+ */
 class CSRF
 {
+	/**
+     * Nome do campo oculto do formulário que receberá o 
+     * token gerado
+     */
 	const HIDDEN_FORM_INPUT_NAME = "_token";
+
+	/**
+     * Nome da variável de sessão onde será armazenado o 
+     * token gerado
+     */
 	const SESSION_KEY_NAME = "_csrf_token";
 
+	/**
+     * Gera um token
+     */
 	public static function GenerateToken() 
 	{
 		$token = md5( uniqid(microtime( true ) ) );
@@ -17,6 +31,12 @@ class CSRF
 		return $token;
 	}
 
+
+	/**
+     * Gera o HTML do campo oculto do formulário, com um 
+     * valor válido para o token
+     * @return string String HTML do campo oculto
+     */
 	public static function GenerateHiddenFormInput()
 	{
 		$token = self::GenerateToken();
@@ -26,6 +46,11 @@ class CSRF
 		return $input;
 	}
 
+
+	/**
+     * Compara os tokens da sessão e do POST. Se forem 
+     * diferentes, é uma tentativa de ataque CSRF.
+     */
 	public static function Check()
 	{
 		$postedToken = isset( $_POST[self::HIDDEN_FORM_INPUT_NAME] ) ? $_POST[self::HIDDEN_FORM_INPUT_NAME] : null;

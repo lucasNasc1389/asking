@@ -2,6 +2,9 @@
 
 namespace Models;
 
+/**
+ * Model que representa um usuário
+ */
 class User extends BaseModel
 {
 	const STATUS_ACTIVE = 1;
@@ -20,6 +23,16 @@ class User extends BaseModel
 	protected $created_at;
 	protected $updated_at;
 
+
+    /**
+     * Gera o token que será salvo no cookie. 
+     *
+     * seguranca-em-sistemas-de-login-senhas-e-cookies/
+     *
+     * 
+     * seguranca-em-sistemas-de-login-senhas-e-cookies/
+     * @return string Token gerado
+     */
 	public function generateToken()
 	{
 		$string = sprintf("%d%s%s", $this->id, $this->password, microtime( true ));
@@ -30,7 +43,11 @@ class User extends BaseModel
 		return $token;
 	}
 
-
+    /**
+     * Atualiza o token de acesso, no próprio objeto e no 
+     * banco de dados
+     * @param  string $token Token a ser usado na atualização
+     */
 	public function updateToken( $token )
 	{
 		$this->token = $token;
@@ -48,8 +65,10 @@ class User extends BaseModel
 
     /**
      * Altera a senha do usuário
-     * @param  string $password Nova senha, sem aplicação do hash
-     * @return bool     TRUE em caso de sucesso, FALSE caso contrário
+     * @param  string $password Nova senha, sem aplicação do 
+     * hash
+     * @return bool     TRUE em caso de sucesso, FALSE caso 
+     * contrário
      */
     public function changePassword( $password )
     {

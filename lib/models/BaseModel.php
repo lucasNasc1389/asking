@@ -2,10 +2,23 @@
 
 namespace Models;
 
+
+/**
+ * Model base para todas as outras models da aplicação
+ */
 class BaseModel
 {
+	// Nome da tabela relativa à model
+    // Esse valor deve ser sobrescrito pelas classes filhas
 	protected $tableName = null;
 
+	/**
+     * Busca um registro na tabela relativa à model
+     * @param  mixed $value   Valor a ser usado no filtro da busca
+     * @param  string $field  Nome do campo a ser usado na filtragem (padrão: campo id)
+     * @param  int $fieldType Tipo do campo usado no filtro (padrão PDO::PARAM_STR)
+     * @return mixed    O próprio objeto, com suas propriedades preenchidas com os valores do banco de daods
+     */
 	public function find( $value, $field = 'id', $fieldType = \PDO::PARAM_STR )
 	{
 		if ( ! isset( $this->tableName ) || empty( $this->tableName ) )

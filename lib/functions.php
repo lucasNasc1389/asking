@@ -1,8 +1,13 @@
 <?php
-/*
-	Verifica se o ambiente atual é de desenvolvimento
-  	@return boolean Retorna TRUE se for ambiente de desenvolvimento, FALSE caso contrário
-*/
+/**
+ * Arquivo de funções para uso geral
+ */
+
+ /*
+	* Verifica se o ambiente atual é de desenvolvimento
+  *	@return boolean Retorna TRUE se for ambiente de 
+  * desenvolvimento, FALSE caso contrário
+  */
 
   	function isDevEnv() {
   		return ENV == 'dev';

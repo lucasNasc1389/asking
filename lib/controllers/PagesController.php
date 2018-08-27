@@ -2,8 +2,16 @@
 
 namespace Controllers;
 
+/**
+ * Controller para páginas gerais da aplicação
+ */
 class PagesController
 {
+
+	/**
+     * Exibe a página inicial
+     * @return [type] [description]
+     */
 	public static function home()
 	{
 		//busca o usuário logado ( ou null se não estiver logado)

@@ -1,4 +1,12 @@
 <?php 
+/*
+ * Script para criar a conta do administrador.
+ *
+ * Se utilizar esse sistema em produção, execute este script 
+ * e depois o remova, para que não seja acessível para outros 
+ * usuários
+ */
+
  require_once "init.php";
 
  $name 	       = 'Administrador Geral';

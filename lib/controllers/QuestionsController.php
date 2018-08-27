@@ -2,16 +2,27 @@
 
 namespace Controllers;
 
+/**
+ * Controller de perguntas
+ */
 class QuestionsController
 {
+	/**
+     * Formulário de criação de pergunta
+     */
 	public static function create()
 	{
 		\Auth::denyNotLoggedInUsers();
 		\View::make( 'question.create' );
 	}
 
+
+	/**
+     * Processa o formulário de criação de pergunta
+     */
 	public static function store()
 	{
+		// impede acesso a usuário não logado
 		\Auth::denyNotLoggedInUsers();
 		\CSRF::Check();
 
@@ -63,6 +74,12 @@ class QuestionsController
 		}
 	}
 
+
+
+	/**
+     * Exibe uma pergunta, juntamente com suas respostas
+     * @param  int $id ID da pergunta
+     */
 	public static function show( $id )
 	{
 		//busca os dados da pergunta
