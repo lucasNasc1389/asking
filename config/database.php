@@ -1,6 +1,6 @@
 <?php
 
-define( 'MYSQL_HOST', 'localhost' ); // servidor
-define( 'MYSQL_USER', 'root' ); // usuario
-define( 'MYSQL_PASS', '1234'); // senha
-define( 'MYSQL_DBNAME', 'asking'); // nome do banco de dados
+define( 'MYSQL_HOST', '****' ); // servidor
+define( 'MYSQL_USER', '****' ); // usuario
+define( 'MYSQL_PASS', '****'); // senha
+define( 'MYSQL_DBNAME', '****'); // nome do banco de dados
